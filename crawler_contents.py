@@ -15,7 +15,7 @@ id_list = []
 with open('id_list_2019-01-25-14-25-21.csv', 'r') as csvFile:
     reader = csv.reader(csvFile)
     for row in reader:
-        id_list.append(row)
+        id_list.append(row)  # the syntax is id_list.append(['86086'])
         
 label_list = ['ID', '建議之標題', '建議資料集名稱', '建議開放的欄位', '建議原因', '派發機關', '回復狀態', '分派狀態', '回復時間', '回應']
 
