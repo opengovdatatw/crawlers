@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr  9 11:34:12 2019
-
 Given ID=86086, to get contents.
-
 For fixing issue #3
-
 @author: york
 """
 import requests
@@ -64,17 +61,25 @@ for id in id_list:
         node_title = soup.find_all('h1', class_='node-title')
         for node_title_row in node_title:
             single_list.append(node_title_row.string)
-        
-    # 建議資料集名稱 # <div class="field field-name-field-suggest-dataset field-type-text field-label-inline clearfix">
-    suggest_dataset_name = soup.find_all(
-            'div', class_='field field-name-field-suggest-dataset field-type-text field-label-inline clearfix'
+    if 0:
+        # 建議資料集名稱 
+        suggest_dataset = soup.find_all(
+                'div', class_='field field-name-field-suggest-dataset field-type-text field-label-inline clearfix'
+                )[0].find_all(
+                        'div', class_='field-items'
+                        )[0].find_all(
+                                'div', class_='field-item even'
+                                )[0].string
+    if 1:
+        # 派發機關 
+        assign_agency = soup.find_all(
+            'div', class_='field field-name-field-assign-agency field-type-entityreference field-label-inline clearfix'
             )[0].find_all(
                     'div', class_='field-items'
                     )[0].find_all(
-                            'div', class_='field-item even'
-                            )[0].string
-    #single_list.append(field_item_row.string)
-
+                            'div'
+                            )
+    
     if 0:
         # 回應之內容        
         comments_content = soup.find_all('div', class_='field field-name-comment-body field-type-text-long field-label-hidden')
