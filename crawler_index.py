@@ -27,14 +27,14 @@ for url in url_list:
     for tag in atags:
         if (tag.get('href')[0:6] == '/node/' 
         and tag.get('href')[6:] != "37299"): # 排除"政府網站資料開放宣告"
-            print(tag.get('href')[6:])
+            #print(tag.get('href')[6:])
             id_list.append([tag.get('href')[6:]])
 
 t_obj = datetime.datetime.now()
 t = str(t_obj)
 legal_time_str = t[0:10]+'-'+t[11:13]+'-'+t[14:16]+'-'+t[17:19]
 
-with open('id_list_' + legal_time_str + '.csv', 'w') as csvFile:
+with open('id_list_' + legal_time_str + '.csv', 'w', newline='') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerows(id_list)
 
