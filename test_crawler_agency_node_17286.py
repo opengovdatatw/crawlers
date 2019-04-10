@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 9 22:59:00 2019
-
-Get { ID | numbers of agency assigned | names of those agencies }
+Created on Wed Apr 10 15:50:20 2019
 
 @author: york
 """
-import requests
-from bs4 import BeautifulSoup
-import csv
 
-id_list = [['86086']] 
+
+id_list = [['17286']] 
 
 all_contents = []  # This list contains all we want.
 

@@ -34,7 +34,7 @@ t_obj = datetime.datetime.now()
 t = str(t_obj)
 legal_time_str = t[0:10]+'-'+t[11:13]+'-'+t[14:16]+'-'+t[17:19]
 
-with open('id_list_' + legal_time_str + '.csv', 'w', newline='') as csvFile:
+with open('id_list_' + legal_time_str + '.csv', 'w', newline='') as csvFile:c
     writer = csv.writer(csvFile)
     writer.writerows(id_list)
 
