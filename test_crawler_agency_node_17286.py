@@ -29,12 +29,18 @@ for id in id_list:
     soup = BeautifulSoup(resp.text, 'lxml')
 
     # Get the 派發機關
-    assign_agency = soup.find_all(
+    if soup.find_all(
         'div', class_='field field-name-field-assign-agency field-type-entityreference field-label-inline clearfix'
-        )[0].find_all(
-                'div', class_='field-items'
-                )[0].find_all(
-                        'div')
+        ) != []:
+        
+        assign_agency = soup.find_all(
+            'div', class_='field field-name-field-assign-agency field-type-entityreference field-label-inline clearfix'
+            )[0].find_all(
+                    'div', class_='field-items'
+                    )[0].find_all(
+                            'div')
+    else: # It is empty. Something wrong.
+        assign_agency = ''
     
     # Put the number of agencies in this single_list
     single_list.append(len(assign_agency))
@@ -47,7 +53,7 @@ for id in id_list:
     all_contents.append(single_list)
     
 if 1:
-    with open('test_crawler_assign_agency_node_86086.csv', 'w', newline = '', 
+    with open('test_crawler_assign_agency_node_17286.csv', 'w', newline = '', 
               encoding='utf-8') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerows(all_contents)
