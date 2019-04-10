@@ -42,7 +42,7 @@ else:  ### use IDs stored
 
 all_contents = []  # This list contains all we want.
 
-label_list = ['ID', "派發機關number", "派發機關"]  # the row of labels
+label_list = ['ID', "派發機關數量", "派發機關"]  # the row of labels
 all_contents.append(label_list)
 
 for id in id_list:
@@ -54,23 +54,33 @@ for id in id_list:
     # Put the ID in this single_list
     single_list.append(id_str)  # Get { ID }
 
+
     # Get the SOUP
     url = 'https://data.gov.tw/node/' + id_str
     resp = requests.get(url)
     resp.encoding = 'utf-8' # encoded with format utf-8 for chinese character
     soup = BeautifulSoup(resp.text, 'lxml')
 
-# for debugging
+# To debug
     print(id_str)
 
     # Get 派發機關 form the soup
-    assign_agency = soup.find_all(
+    ## Check if the 派發機關 field exist or not
+    if soup.find_all(
         'div', class_='field field-name-field-assign-agency field-type-entityreference field-label-inline clearfix'
-        )[0].find_all( # ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
-                'div', class_='field-items'
-                )[0].find_all(
-                        'div'
-                        )
+        ) != []:
+        
+        assign_agency = soup.find_all(
+            'div', class_='field field-name-field-assign-agency field-type-entityreference field-label-inline clearfix'
+            )[0].find_all(
+                    'div', class_='field-items'
+                    )[0].find_all(
+                            'div')
+    else: # It is empty.
+        assign_agency = ''
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+                        
+        
     # Put the number of agencies in this single_list
     single_list.append(len(assign_agency))  # Get { ID | number }
     
@@ -82,14 +92,15 @@ for id in id_list:
     all_contents.append(single_list)
     
     
-if 0:
+if 1:
     t_obj = datetime.datetime.now()
     t = str(t_obj)
     legal_time_str = t[0:10]+'-'+t[11:13]+'-'+t[14:16]+'-'+t[17:19]
     
-    with open('agency_' + legal_time_str + '.csv', 'w') as csvFile:
+    with open('agency_' + legal_time_str + '.csv', 'w', newline = ''
+              ) as csvFile:
         writer = csv.writer(csvFile)
-        writer.writerows(id_list)
+        writer.writerows(all_contents)
     csvFile.close()
 
 
