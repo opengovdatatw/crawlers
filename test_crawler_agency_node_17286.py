@@ -4,7 +4,9 @@ Created on Wed Apr 10 15:50:20 2019
 
 @author: york
 """
-
+import requests
+from bs4 import BeautifulSoup
+import csv
 
 id_list = [['17286']] 
 
