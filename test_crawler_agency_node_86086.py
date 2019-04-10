@@ -24,7 +24,7 @@ for id in id_list:
     single_list = []  
 
     # Put the ID in this single_list
-    single_list.append(id_str)  # generate URL
+    single_list.append(id_str)  
 
     # Get the SOUP
     url = 'https://data.gov.tw/node/' + id_str
