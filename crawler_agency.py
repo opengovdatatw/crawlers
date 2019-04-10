@@ -14,10 +14,10 @@ import datetime
 # crawl all the node-ID
 
 ## collect all node-ID in `id_list`
-if 0:  ### Get IDs right now
+if 1:  ### Get IDs right now
     ## generate all URLs
     url_list = []
-    for page_number in range(0,83):  # page 0 to 83, 最終頁數目前是手動加上去 
+    for page_number in range(0,84):  # page 1~84=>0~83=>range(0,84) 最終頁數目前是手動加上去 
         url_list.append('https://data.gov.tw/suggests?page='+str(page_number))
         id_list = []
     for url in url_list:
@@ -28,7 +28,7 @@ if 0:  ### Get IDs right now
         for tag in atags:
             if (tag.get('href')[0:6] == '/node/'
             and tag.get('href')[6:] != "37299"): # 排除"政府網站資料開放宣告"
-                #print(tag.get('href')[6:])
+                print("getID "+tag.get('href')[6:])
                 id_list.append([tag.get('href')[6:]])
 
 else:  ### use IDs stored
@@ -76,9 +76,10 @@ for id in id_list:
                     'div', class_='field-items'
                     )[0].find_all(
                             'div')
+        print("O")
     else: # It is empty.
         assign_agency = ''
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
                         
         
     # Put the number of agencies in this single_list
